@@ -11,7 +11,7 @@ class Centipede:
 
     def start(self): #start messages
         print(f"You must solve into: {self.solved_centipede}")
-        print(f"Your scrambled state is {self.current_centipede}")
+        print(f"Your scrambled state is: {self.current_centipede}")
         
     def generate(self): #generates possible moves
         moves = []
