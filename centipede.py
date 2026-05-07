@@ -26,6 +26,8 @@ class Centipede:
         for _ in range(self.length*self.length):
             i, sign = random.choice(self.generate())
             self. swap(i, sign)
+            #check whether this doesn't scramble it into a solved state already ~ (TBI)
+        
 
     def permute(self, i, sign): #main puzzle mechanic
         if self.validate(i, sign):
@@ -55,5 +57,4 @@ class Centipede:
     def check(self,x): #if solved, ends program
         if self.current_centipede == self.solved_centipede:
             print(f"Congratulations! You solved it in {x} moves!")
-            sys.exit()
-
+            return True
