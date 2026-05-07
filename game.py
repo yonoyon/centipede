@@ -1,24 +1,45 @@
-import sys #sys.exit()
+import time #sleep()
+import sys #exit()
+import random #choice()
 
 from centipede import Centipede
 
-while True: #gets length from user input
-    try:
-        length = int(input("Input length: ").strip())
-        if length < 3:
-            print("Length can't be this short!")
-            continue
-        break
-    except ValueError:
-        print("Not a valid integer!")
+def y(): #continues if user wants to
+    print("Continuing...")
+    time.sleep(1)
 
-centipede_1 = Centipede(length) #first (and only) object lol
+def n(): #exits program
+    print("Exiting...")
+    time.sleep(1)
+    sys.exit()
+
+def q(): #exits program
+    print("Exiting...")
+    time.sleep(1)
+    sys.exit()
+
+ynqe = { #see functions above
+    "yes" : y,
+    "y" : y,
+    "yeah" : y,
+    "ye" : y,
+    "yea" : y,
+    "no" : n,
+    "nah" : n,
+    "naw" : n,
+    "na" : n,
+    "n" : n,
+    "quit" : q,
+    "q" : q,
+    "exit" : q,
+    "leave" : q
+}
 
 def parse_move(move): #parses move, extracting position and direction
     move = move.strip().lower()
     
-    if move == "quit":
-        sys.exit()
+    if move == "quit": #use dictionary for better logic ~ (TBI)
+        q()
     
     if len(move) < 2:
         raise ValueError("Too short. ")
@@ -34,19 +55,65 @@ def parse_move(move): #parses move, extracting position and direction
     
     return i, sign
 
-centipede_1.start() #start message
-
-x = 0 #define counter
+def game(): #game function/loop
+    x = 0 #move counter
+    while True:
+        move = input("Input move: ")
+        try:
+            i, sign = parse_move(move)
+        except ValueError as e:
+            print(f"Invalid Input: {e}")
+            continue
+        if centipede_1.permute(i, sign):
+            x+=1
+        else:
+            print("Invalid move. ")
+        if centipede_1.check(x):
+            user_input = input("Would you like to try again? (y/n)").strip().lower()
+            if user_input in ynqe: #for actions (see ynqe dictionary)
+                ynqe[user_input]()
+                break
+            else:
+                q()
 
 while True: #main loop
-    move = input("Input move: ")
     try:
-        i, sign = parse_move(move)
-    except ValueError as e:
-        print(f"Invalid Input: {e}")
-        continue
-    if centipede_1.permute(i, sign):
-        x+=1
-    else:
-        print("Invalid move. ")
-    centipede_1.check(x)
+        length = int(input("Input length: ").strip())
+        if length < 3:
+            print("Length can't be this short!")
+            continue
+        centipede_1 = Centipede(length)
+        centipede_1.start()
+        game()
+    except ValueError:
+        print("Not a valid integer!")
+
+
+"""
+#you can uncomment this if you want some more "fun"
+def funny(): 
+    while True:
+        try:
+            print(random.choice(["lorem ipsum", "lorem ipsum", "lorem ipsum"]))
+            time.sleep(0.3)
+        except KeyboardInterrupt:
+            while True:
+                try:
+                    print("lorem ipsum")
+                except KeyboardInterrupt:
+                    while True:
+                        try:
+                            print("lorem ipsum")
+                        except KeyboardInterrupt:
+                            while True:
+                                try:
+                                    print("lorem ipsum")
+                                except KeyboardInterrupt:
+                                    print("lorem ipsum")
+                                    q()
+#make sure to add this to the dictionary
+    "lorem ipsum" : funny,
+    "lorem ipsum" : funny,
+    "lorem ipsum" : funny
+#of course, this will only work if you insert it correctly. have fun!
+""" 
