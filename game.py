@@ -4,29 +4,35 @@ import random #choice()
 
 from centipede import Centipede
 
-def y(): #continues if user wants to
-    print("Continuing...")
-    time.sleep(1)
-def n(): #exits program
-    print("Exiting...")
-    time.sleep(1)
-def q(): #exits program
-    print("Exiting...")
-    time.sleep(1)
+#main commands, work globally
 
-yes = { #see functions above
-    "yes" : y,
-    "y" : y,
-    "yeah" : y,
-    "ye" : y,
-    "yea" : y
-    }
+def help_func():
+    print("help_func!")
+    print("test")
+
+def quit_func():
+    print("Exiting...")
+    time.sleep(1)
+    sys.exit("test")
+
+commands = {
+    "help" : help_func,
+    "h" : help_func,
+    "tutorial" : help_func,
+    "tut" : help_func,
+
+    "quit" : quit_func,
+    "q" : quit_func,
+    "exit" : quit_func,
+    "leave" : quit_func,
+}
+
 
 def parse_move(move): #parses move, extracting position and direction
     move = move.strip().lower()
     
-    if move == "quit": #use dictionary for better logic ~ (TBI)
-        q()
+    if move in commands:
+        move[commands]()
     
     if len(move) < 2:
         raise ValueError("Too short. ")
@@ -57,14 +63,27 @@ def game(centipede_1): #game function/loop
             print("Invalid move. ")
         if centipede_1.check(x):
            break
-           
 
-
-
-
-
-def levels():
+def levels(): #for levels
     print("levels!")
+
+
+"""
+dictionary+function, main function for sandbox mode
+"""
+def y(): 
+    print("Continuing...")
+    time.sleep(1)
+
+sandbox_yes = {
+    **commands,
+    "yes" : y,
+    "y" : y,
+    "yeah" : y,
+    "ye" : y,
+    "yea" : y,
+    "okay" :y,
+    }
 
 def sandbox():
     print("sandbox!")
@@ -77,97 +96,43 @@ def sandbox():
             centipede_1 = Centipede(length)
             centipede_1.start()
             game(centipede_1)
-            user_input = input("Would you like to try again?").strip().lower()
-            if  user_input in yes:
-                yes[user_input]()
+            print("Would you like to try again?")
+            user_input = input("Input here: ").strip().lower()
+            if  user_input in sandbox_yes:
+                sandbox_yes[user_input]()
             else:
                 break
         except ValueError:
             print("Not a valid integer!")
+            
+"""
+main menu stuff
+"""
 
+menu_commands = {
+    **commands,
 
-def help_func():
-    print("help_func!")
-    
-def quit_func():
-    print("quit_func!")
-    sys.exit()
-
-
-
-menu_options = {
     "levels" : levels,
     "level" : levels,
     "l" : levels,
 
     "sandbox" : sandbox,
     "sand" : sandbox,
-    "s" : sandbox,
+    "s" : sandbox
 
-    "help" : help_func,
-    "h" : help_func,
-    "tutorial" : help_func,
-    "tut" : help_func,
-
-    "quit" : quit_func,
-    "q" : quit_func,
-    "exit" : quit_func,
-    
-    "1" : levels,
-    "2" : sandbox,
-    "3" : help_func,
-    "4": quit_func
 }
 
 def menu():
     print("Welcome! Choose whether you want to play through the levels or enter sandbox mode. ")
     print("Of course, you can also input help at any time, if needed. If you'd like to quit, input quit. ")
     
-    
     while True:
-        print("Main menu")
+        print("You're in the main menu. ")
         user_input = input("Input here: ").strip().lower()
-        if user_input in menu_options:
-            menu_options[user_input]()
-            print("menu?")
+        if user_input in menu_commands:
+            menu_commands[user_input]()
         else:
             print("Input invalid, try again. ")
     print("passed loop!")
 
-
-
-
-
-
-
-menu()
-
-
-"""
-#you can uncomment this if you want some more "fun"
-def funny(): 
-    while True:
-        try:
-            print(random.choice(["lorem ipsum", "lorem ipsum", "lorem ipsum"]))
-            time.sleep(0.3)
-        except KeyboardInterrupt:
-            while True:
-                try:
-                    print("lorem ipsum")
-                except KeyboardInterrupt:
-                    while True:
-                        try:
-                            print("lorem ipsum")
-                        except KeyboardInterrupt:
-                            while True:
-                                try:
-                                    print("lorem ipsum")
-                                except KeyboardInterrupt:
-                                    print("lorem ipsum")
-                                    q()
-#make sure to add this to the dictionary
-    "lorem ipsum" : funny,
-    "lorem ipsum" : funny,
-    "lorem ipsum" : funny
-#of course, this will only work if you insert it correctly. have fun!
-""" 
+menu()#starts
