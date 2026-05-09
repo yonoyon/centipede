@@ -21,13 +21,12 @@ class Sandbox:
         self.scramble()
 
     def sandbox(self):
-        print("sandbox!")
         while True: #main loop
             self.start()
             self.game()
             print("Would you like to try again?")
             user_input = input("Input here: ").strip().lower()
-            if  user_input in self.sandbox_yes:
+            if  user_input in self.sandbox_yes: #add in commands case ~ (TBI)
                 self.sandbox_yes[user_input]()
                 return True
             else:
@@ -37,7 +36,7 @@ class Sandbox:
         print("Continuing...")
         time.sleep(1)
 
-    def start(self): #start messages
+    def start(self): #start messages 
         print(f"You must solve into: {self.solved_centipede}")
         print(f"Your scrambled state is: {self.current_centipede}")
 
@@ -45,6 +44,10 @@ class Sandbox:
         x = 0 #move counter
         while True:
             move = input("Input move: ").strip().lower()
+            if move in self.commands:
+                self.commands[move]()
+                print(f"Current state: {self.current_centipede}")
+                continue
             try:
                 i, sign = self.parse_move(move)
             except ValueError as e:
@@ -54,26 +57,26 @@ class Sandbox:
                 x+=1
             else:
                 print("Invalid move. ")
-            if self.check(x):
+            if self.check():
+                if x > 1:
+                    print(f"Congratulations! You solved it in {x} moves!")
+                if x == 1:
+                    print(f"Congratulations! You solved it in {x} move!")
                 break
 
     def parse_move(self, move): #only for parsing of moves, not for validation
-        move = move.strip().lower()
-    
-        if move in self.commands:
-            self.commands[move]()
-    
+            
         if len(move) < 2:
             raise ValueError("Too short. ")
 
         try:
             i = int(move[:-1]) - 1
         except ValueError: 
-            raise ValueError("Not a valid index. ")
+            raise ValueError("Not a valid position. ")
         
         sign = move[-1]
         if sign not in "+-":
-            raise ValueError("Not a valid operator. ")
+            raise ValueError("Not a valid direction. ")
     
         return i, sign
 
@@ -111,16 +114,12 @@ class Sandbox:
             return False
         return True
 
-    def swap(self, i, sign): #main puzzle logic. used for scrambling and solving
+    def swap(self, i, sign): #main puzzle logic. used for scrambling and solving. not sure how im gonna implement the multiple move sandbox system yet, ~ (TBI)
         if sign == "+":
             self.current_centipede[i], self.current_centipede[i+1]  = -self.current_centipede[i+1], -self.current_centipede[i]
         else:
             self.current_centipede[i], self.current_centipede[i-1]  = -self.current_centipede[i-1], -self.current_centipede[i]
     
-    def check(self,x): #if solved, ends program
-        if self.current_centipede == self.solved_centipede and  x > 1:
-            print(f"Congratulations! You solved it in {x} moves!")
-            return True
-        if self.current_centipede == self.solved_centipede and x == 1:
-            print(f"Congratulations! You solved it in {x} move!")
+    def check(self): #very simple, "independent" method
+        if self.current_centipede == self.solved_centipede:
             return True
