@@ -124,4 +124,3 @@ class Sandbox:
         if self.current_centipede == self.solved_centipede and x == 1:
             print(f"Congratulations! You solved it in {x} move!")
             return True
-
