@@ -1,3 +1,5 @@
+I did some straight bs trying to merge alpha into main, so all alpha commits are now gone. If you want to take a look, check out PR #1.. 
+
 In this game, you must solve a centipede. 
 In other words, permute a list into correct order.
 
