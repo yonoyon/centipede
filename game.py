@@ -88,32 +88,3 @@ while True: #main loop
     except ValueError:
         print("Not a valid integer!")
 
-
-"""
-#you can uncomment this if you want some more "fun"
-def funny(): 
-    while True:
-        try:
-            print(random.choice(["lorem ipsum", "lorem ipsum", "lorem ipsum"]))
-            time.sleep(0.3)
-        except KeyboardInterrupt:
-            while True:
-                try:
-                    print("lorem ipsum")
-                except KeyboardInterrupt:
-                    while True:
-                        try:
-                            print("lorem ipsum")
-                        except KeyboardInterrupt:
-                            while True:
-                                try:
-                                    print("lorem ipsum")
-                                except KeyboardInterrupt:
-                                    print("lorem ipsum")
-                                    q()
-#make sure to add this to the dictionary
-    "lorem ipsum" : funny,
-    "lorem ipsum" : funny,
-    "lorem ipsum" : funny
-#of course, this will only work if you insert it correctly. have fun!
-""" 
