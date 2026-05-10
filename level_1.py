@@ -1,6 +1,6 @@
 import time
 
-class Level_1: #levels have predefined length, scramble. only need move parsing/validation and main game loop (w win check)
+class Level_1:
 
     def __init__(self, commands):
         self.commands = commands
@@ -13,23 +13,34 @@ class Level_1: #levels have predefined length, scramble. only need move parsing/
             time.sleep(1)
             print("A solved state will always look the same: positive numbers from 1 upward. ")
             time.sleep(1)
-            print(f"Have a try with {self.current}. Input help if you don't know the move notation. ")
-            x = 0
-            while True:
-                print(f"Current state: {self.current}")
-                i, sign = self.get_move()
-                self.apply_move(i, sign)
-                x+=1
-                if self.check():
-                    if x > 1:
-                        print(f"Congratulations! You solved it in {x} moves!")
-                    if x == 1:
-                        print(f"Congratulations! You solved it in {x} move!")
-                    if not self.level_1_end():
-                        break
-            return True
+            print(f"Have a try with {self.current} - you can almost certainly solve this intuitively. Input help if you don't know the move notation, or if you need help in general. ")
+            print("Have fun!")
+            if self.play_level():
+                return True
+            else:
+                return False
         
-    def level_1_end(self):
+    def play_level(self):
+        x = 0
+        while True:
+            print(f"Current state: {self.current}")
+            i, sign = self.get_move()
+            self.permute(i, sign)
+            x+=1
+            if self.check():
+                if x > 1:
+                    print(f"Congratulations! You solved it in {x} moves!")
+                if x == 1:
+                    print(f"Congratulations! You solved it in {x} move!")
+                if self.level_end():
+                    x = 0
+                    self.current = [1,3,2,5,6,4]
+                    continue
+                else:
+                    return False
+        return True
+
+    def level_end(self):
         while True:
             user_input = input("Would you like to try again? Input: ").strip().lower()
             if  user_input == "yes":
@@ -40,8 +51,6 @@ class Level_1: #levels have predefined length, scramble. only need move parsing/
             else:
                 return False
 
-
-
     def get_move(self):
         while True:
             move = input("Input move: ")
@@ -50,7 +59,7 @@ class Level_1: #levels have predefined length, scramble. only need move parsing/
             except ValueError as e:
                 print(f"Invalid move; {e}")
                 continue
-            if self.validate_level1(i, sign):
+            if self.validate(i, sign):
                 return i, sign
             else:
                 print("Illegal move. ")
@@ -70,7 +79,7 @@ class Level_1: #levels have predefined length, scramble. only need move parsing/
     
         return i, sign
 
-    def validate_level1(self, i, sign):
+    def validate(self, i, sign):
         if i < 0 or i >= self.length:
             return False
         if sign == "+" and i + 1 >= self.length:
@@ -79,7 +88,7 @@ class Level_1: #levels have predefined length, scramble. only need move parsing/
             return False
         return True
 
-    def apply_move(self, i, sign):
+    def permute(self, i, sign):
         if sign == "+":
             self.current[i], self.current[i+1]  = self.current[i+1], self.current[i]
         else:
