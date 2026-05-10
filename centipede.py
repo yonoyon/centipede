@@ -33,12 +33,13 @@ commands = {
 }
 
 
-def levels(): #for levels ~(TBI)
+def levels():
     print("Levels available: 1")
     #choice = input("Input number of level to play: ")
     while True:
         level = Level_1(commands)
-        if level.level_1():
+        if not level.level_1():
+            print("went thru")
             break
 
 
