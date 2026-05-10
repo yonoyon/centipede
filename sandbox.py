@@ -82,6 +82,7 @@ class Sandbox:
                 print(f"Invalid Input: {e}")
                 continue
             if self.permute(i, sign):
+                print(f"Current state: {self.current_centipede}")
                 x+=1
             else:
                 print("Invalid move. ")
@@ -118,15 +119,16 @@ class Sandbox:
         return moves
     
     def scramble(self): #scrambles using generated moves
-        for _ in range(self.length*self.length):
-            i, sign = random.choice(self.generate())
-            self. swap(i, sign)
-            #check whether this doesn't scramble it into a solved state already ~ (TBI)
+        while True:
+            for _ in range(self.length*self.length):
+                i, sign = random.choice(self.generate())
+                self. swap(i, sign)
+            if self.current_centipede != self.solved_centipede:
+                break
 
     def permute(self, i, sign): #main puzzle mechanic
         if self.validate(i, sign):
             self.swap(i, sign)
-            print(f"Current state: {self.current_centipede}")
             return True
         return False
 
