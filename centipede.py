@@ -44,30 +44,17 @@ def levels(): #for levels ~(TBI)
     
 
 
-def tosandbox(): #initializes object for sandbox mode and starts it
+def tosandbox(): #initializes object for sandbox mode and loops it as long as user wants
     while True:
-        length = input("Input length: ").strip().lower()
-        if length in commands:
-            commands[length]()
-            continue
-        try:
-            length = int(length)
-            if length < 3:
-                print("Length can't be this short!")
-            else:
-                centipede_1 = Sandbox(length, commands)
-                if centipede_1.sandbox():
-                    pass
-                else:
-                    break
-        except ValueError:
-            print("Not a valid integer!")
-        
+        centipede_1 = Sandbox(commands)
+        if centipede_1.sandbox():
+            pass
+        else:
+            break
 
 """
 main menu stuff below
 """
-
 menu_commands = {
     **commands,
 
