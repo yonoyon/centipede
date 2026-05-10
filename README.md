@@ -1,7 +1,5 @@
-I did some straight bs trying to merge alpha into main, so all alpha commits are now gone. If you want to take a look, check out PR #1.. 
-
-In this game, you must solve a centipede. 
-In other words, permute a list into correct order.
+In this game, you must solve a centipede. In other words, permute a list into correct order.
+Two game modes are avaialble, those being sandbox and levels.
 
 While the logic itself turned out to be very simple, the core idea behind it was to
 recreate a thought experiment of mine. Imagine a centipede with an x amount of segments.
