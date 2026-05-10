@@ -1,13 +1,12 @@
-#levels mode TBI!!!
-
 import time #time.sleep()
 import sys #sys.exit()
 
 from sandbox import Sandbox
-#from level_1 import Level_1 ~ (TBI)
+from level_1 import Level_1
 
-#basic commands (+functions), work globally
-
+"""
+basic commands (+functions), work globally
+"""
 def help_func():
     print("Move notation is simple. You must input a position and a direction. ")
     print("Position is input with a number, and direction is input with an operator. ")
@@ -35,19 +34,18 @@ commands = {
 
 
 def levels(): #for levels ~(TBI)
-    print("levels")
-    
-    #while True:
-     #   level_1 = Level_1(commands)
-      #  if level_1.level_1():
-       #     break
-    
+    print("Levels available: 1")
+    #choice = input("Input number of level to play: ")
+    while True:
+        level = Level_1(commands)
+        if level.level_1():
+            break
 
 
 def tosandbox(): #initializes object for sandbox mode and loops it as long as user wants
     while True:
-        centipede_1 = Sandbox(commands)
-        if centipede_1.sandbox():
+        centipede = Sandbox(commands)
+        if centipede.sandbox():
             pass
         else:
             break
