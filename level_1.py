@@ -1,10 +1,11 @@
 import time
+from levelsbase import Levelsbase
+class Level_1(Levelsbase):
 
-class Level_1:
-
-    def __init__(self, commands):
-        self.commands = commands
+    def __init__(self,commands):
+        super().__init__(commands)
         self.solved = [1,2,3,4,5,6]
+        self.scrambled = [1,3,2,5,6,4]
         self.current = [1,3,2,5,6,4]
         self.length = len(self.solved)
     
@@ -19,65 +20,6 @@ class Level_1:
                 return True
             else:
                 return False
-        
-    def play_level(self):
-        x = 0
-        while True:
-            print(f"Current state: {self.current}")
-            i, sign = self.get_move()
-            self.permute(i, sign)
-            x+=1
-            if self.check():
-                if x > 1:
-                    print(f"Congratulations! You solved it in {x} moves!")
-                if x == 1:
-                    print(f"Congratulations! You solved it in {x} move!")
-                if self.level_end():
-                    x = 0
-                    self.current = [1,3,2,5,6,4]
-                    continue
-                else:
-                    return False
-        return True
-
-    def level_end(self):
-        while True:
-            user_input = input("Would you like to try again? Input: ").strip().lower()
-            if  user_input == "yes":
-                time.sleep(1)
-                return True
-            elif user_input in self.commands:
-                self.commands[user_input]()
-            else:
-                return False
-
-    def get_move(self):
-        while True:
-            move = input("Input move: ")
-            try:
-                i, sign = self.parse_move(move)
-            except ValueError as e:
-                print(f"Invalid move; {e}")
-                continue
-            if self.validate(i, sign):
-                return i, sign
-            else:
-                print("Illegal move. ")
-        
-    def parse_move(self, move):
-        if len(move) < 2:
-            raise ValueError("Too short. ")
-
-        try:
-            i = int(move[:-1]) - 1
-        except ValueError: 
-            raise ValueError("Not a valid position. ")
-        
-        sign = move[-1]
-        if sign not in "+-":
-            raise ValueError("Not a valid direction. ")
-    
-        return i, sign
 
     def validate(self, i, sign):
         if i < 0 or i >= self.length:
@@ -94,6 +36,3 @@ class Level_1:
         else:
             self.current[i], self.current[i-1]  = self.current[i-1], self.current[i]
 
-    def check(self):
-        if self.current == self.solved:
-            return True
