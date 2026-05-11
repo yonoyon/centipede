@@ -11,8 +11,8 @@ All you have to do is input position (i) and direction (sign). Here's what an ex
 would look like with the "adjacent swap - sign flip" move type.
 
 [-2, 4, 3, -1]  ~ 4-  
-[-2, 4, 1, -3]  ~ 2+
-[-2, -1, -4, -3] ~ 3+
+[-2, 4, 1, -3]  ~ 2+  
+[-2, -1, -4, -3] ~ 3+  
 [-2, -1, 3, 4] ~ 2-  
 [1, 2, 3, 4] -> solved!
 
