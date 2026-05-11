@@ -1,3 +1,5 @@
+This program is still very much a WIP - don't be surprised if you find some weird stuff in the code.
+
 In this game, you must solve a centipede. In other words, permute a list into correct order.
 Two game modes are available, those being sandbox and levels.
 
