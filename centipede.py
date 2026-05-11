@@ -1,57 +1,73 @@
 import time #time.sleep()
 import sys #sys.exit()
-import random #random.choice()
 
 from sandbox import Sandbox
+from level_1 import Level_1
 
-#basic commands (+functions), work globally
-
+"""
+basic commands (+functions), work globally
+"""
 def help_func():
-    print("help_func!")
-    print("test")
+    print("The program will reject invalid move notation. Every input field is designed to accept quit and help as possible commands. ")
+    print("Move notation is simple. You must input a position and a direction. ")
+    print("Position is input with a number, direction with an operator. ")
+    print("An example permutation: [1,3,2,4] to [1,2,3,4]. You can input either 2+ or 3- for this. ")
+    print("2+ swaps the 2nd number with the number following it; 3- swaps the 3rd number with the number preceding it - so in the end, it does the same.")
+    print("This, of course, only applies to this specific move type. Move notation will remain the same, whereas move type will not.")
+    print("Play through the levels to find out what move types exist!")
+    
 
 def quit_func():
     print("Exiting...")
     time.sleep(1)
-    sys.exit("test")
+    sys.exit("Successfully quit centipede. ")
 
 commands = {
     "help" : help_func,
+    "hepl" : help_func,
     "h" : help_func,
     "tutorial" : help_func,
     "tut" : help_func,
 
     "quit" : quit_func,
+    "quti" : quit_func,
     "q" : quit_func,
     "exit" : quit_func,
     "leave" : quit_func,
 }
 
 
-def levels(): #for levels ~(TBI)
-    print("levels!")
+level_names = {
+    "1" : 1,
+    "one" : 1
+}
 
 
-def tosandbox(): #initializes object for sandbox mode and starts it
+def levels(): #a bit of an ugly implementation.. but itll work for now
+    print("Choose which level to play. Currently available: 1 ")
     while True:
-        try:
-            length = int(input("Input length: ").strip())
-            if length < 3:
-                print("Length can't be this short!")
-            else:
-                centipede_1 = Sandbox(length, commands)
-                if centipede_1.sandbox():
-                    pass
-                else:
-                    break
-        except ValueError:
-            print("Not a valid integer!")
+        choice = input("Input level to play: ")
+        if choice in commands:
+            commands[choice]()
         
+        if choice in level_names:
+            if level_names[choice] == 1:
+                level = Level_1(commands)
+                if not level.level_1():
+                    break
+
+
+def tosandbox(): #initializes object for sandbox mode and loops it as long as user wants
+    while True:
+        centipede = Sandbox(commands)
+        if centipede.sandbox():
+            pass
+        else:
+            break
 
 """
 main menu stuff below
 """
-
 menu_commands = {
     **commands,
 
