@@ -8,19 +8,23 @@ from level_1 import Level_1
 basic commands (+functions), work globally
 """
 def help_func():
+    print("The program will reject invalid move notation. Every input field is designed to accept quit and help as possible commands. ")
     print("Move notation is simple. You must input a position and a direction. ")
-    print("Position is input with a number, and direction is input with an operator. ")
-    print("An example: 1,3,2,4 -> 1,2,3,4. In order to do this, you can either input 2+ OR 3-. ")
-    print("2+ = swap the 2nd number with the number following it; 3- = swap the 3rd number with the number preceding it. ")
-    print("The program will reject invalid move notations. ")
+    print("Position is input with a number, direction with an operator. ")
+    print("An example permutation: [1,3,2,4] to [1,2,3,4]. You can input either 2+ or 3- for this. ")
+    print("2+ swaps the 2nd number with the number following it; 3- swaps the 3rd number with the number preceding it - so in the end, it does the same.")
+    print("This, of course, only applies to this specific move type. Move notation will remain the same, whereas move type will not.")
+    print("Play through the levels to find out what move types exist!")
+    
 
 def quit_func():
     print("Exiting...")
     time.sleep(1)
-    sys.exit("test")
+    sys.exit("Successfully quit centipede. ")
 
 commands = {
     "help" : help_func,
+    "hepl" : help_func,
     "h" : help_func,
     "tutorial" : help_func,
     "tut" : help_func,
@@ -33,14 +37,24 @@ commands = {
 }
 
 
-def levels():
-    print("Levels available: 1")
-    #choice = input("Input number of level to play: ")
+level_names = {
+    "1" : 1,
+    "one" : 1
+}
+
+
+def levels(): #a bit of an ugly implementation.. but itll work for now
+    print("Choose which level to play. Currently available: 1 ")
     while True:
-        level = Level_1(commands)
-        if not level.level_1():
-            print("went thru")
-            break
+        choice = input("Input level to play: ")
+        if choice in commands:
+            commands[choice]()
+        
+        if choice in level_names:
+            if level_names[choice] == 1:
+                level = Level_1(commands)
+                if not level.level_1():
+                    break
 
 
 def tosandbox(): #initializes object for sandbox mode and loops it as long as user wants

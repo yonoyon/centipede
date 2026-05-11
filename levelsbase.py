@@ -9,7 +9,7 @@ class Levelsbase:
         self.current = []
         self.length = len(self.solved)
 
-    def play_level(self):
+    def play_level(self): #main loop for any level
         x = 0
         while True:
             print(f"Current state: {self.current}")
@@ -29,10 +29,10 @@ class Levelsbase:
                     return False
         return True
 
-    def level_end(self):
+    def level_end(self): #called when user finishes level
         while True:
             user_input = input("Would you like to try again? Input: ").strip().lower()
-            if  user_input == "yes":
+            if  user_input == "yes": #general "yes" dictionary should be used here, similar to sandbox_yes ~ (TBI)
                 time.sleep(1)
                 return True
             elif user_input in self.commands:
@@ -40,7 +40,7 @@ class Levelsbase:
             else:
                 return False
 
-    def get_move(self):
+    def get_move(self): #gets move from user, calls parse_move and validate (level specific) to filter out bad move notation/illegal moves
         while True:
             move = input("Input move: ")
             try:
@@ -53,7 +53,7 @@ class Levelsbase:
             else:
                 print("Illegal move. ")
         
-    def parse_move(self, move):
+    def parse_move(self, move): #see get_move()
         if len(move) < 2:
             raise ValueError("Too short. ")
 
@@ -68,5 +68,5 @@ class Levelsbase:
     
         return i, sign
 
-    def check(self):
+    def check(self): #check!
         return self.current == self.solved

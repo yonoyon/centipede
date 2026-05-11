@@ -9,7 +9,7 @@ class Level_1(Levelsbase):
         self.current = [1,3,2,5,6,4]
         self.length = len(self.solved)
     
-    def level_1(self):
+    def level_1(self): #greets user, starts level
             print("Welcome to level 1. The goal of any level is to permute the given list into a solved state. ")
             time.sleep(1)
             print("A solved state will always look the same: positive numbers from 1 upward. ")
@@ -21,7 +21,7 @@ class Level_1(Levelsbase):
             else:
                 return False
 
-    def validate(self, i, sign):
+    def validate(self, i, sign): #specific to this level (move type)
         if i < 0 or i >= self.length:
             return False
         if sign == "+" and i + 1 >= self.length:
@@ -30,7 +30,7 @@ class Level_1(Levelsbase):
             return False
         return True
 
-    def permute(self, i, sign):
+    def permute(self, i, sign): #specific to this level. probably gonna call this "adjacent swap"
         if sign == "+":
             self.current[i], self.current[i+1]  = self.current[i+1], self.current[i]
         else:
