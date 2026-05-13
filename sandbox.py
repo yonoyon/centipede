@@ -2,6 +2,7 @@
 sandbox is a separate game mode. it is fundamentally different from the levels mode, insofar as user can choose length and move type freely.
 for the sake of simplicity, every aspect of sandbox mode is covered here, from I/O to logic. this is INTENTIONAL.
 one thing that could change regarding this is the methods in general. currently theres no clear separation between what interacts with the user, what actually interacts with the list and what just loops it all...
+sandbox is more of a standalone thing for now.
 """
 
 import sys #sys.exit()
@@ -62,7 +63,6 @@ class Sandbox:
 
     def y(self): #a bit unnecessary but whatevs
         print("Continuing...")
-        time.sleep(1)
 
     def start(self): #start messages 
         print(f"You must solve into: {self.solved_centipede}")
@@ -158,7 +158,7 @@ class Sandbox:
 #something like this will be used once multiple move types are possible
     def options(self):
         print("You're in sandbox mode. To proceed, input desired length and move type. ")
-        print("Available move types: adjacent")
+        print("Available move types: adjacent swap, extremes - sliding")
         while True:
             centipede_length = get_length()
             return centipede_length

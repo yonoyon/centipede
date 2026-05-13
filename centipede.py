@@ -3,9 +3,10 @@ import sys #sys.exit()
 
 from sandbox import Sandbox
 from level_1 import Level_1
+from level_2 import Level_2
 
 """
-basic commands (+functions), work globally
+basic commands (+functions), work globally. could look into separation of sandbox and levels mode even more by splitting these as well.. not sure yet.
 """
 def help_func():
     print("The program will reject invalid move notation. Every input field is designed to accept quit and help as possible commands. ")
@@ -39,27 +40,32 @@ commands = {
 
 level_names = {
     "1" : 1,
-    "one" : 1
+    "one" : 1,
+    "2" : 2,
+    "two" : 2
 }
 
 
-def levels(): #a bit of an ugly implementation.. but itll work for now
-    print("Choose which level to play. Currently available: 1 ")
+def levels(): #absolute abomination of a loop.. better one TBI for sure
+    print("Choose which level to play. Currently available: 1, 2 ")
     while True:
         choice = input("Input level to play: ")
         if choice in commands:
             commands[choice]()
-        
         if choice in level_names:
             if level_names[choice] == 1:
                 level = Level_1(commands)
                 if not level.level_1():
                     break
+            if level_names[choice] == 2:
+                level = Level_2(commands)
+                if not level.level_2():
+                    break
 
 
 def tosandbox(): #initializes object for sandbox mode and loops it as long as user wants
     while True:
-        centipede = Sandbox(commands)
+        centipede = Sandbox(commands, input_yes)
         if centipede.sandbox():
             pass
         else:

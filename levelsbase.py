@@ -4,10 +4,23 @@ class Levelsbase:
     
     def __init__(self, commands):
         self.commands = commands
+        self.input_yes = {
+        "yes" : self.y,
+        "y" : self.y,
+        "yeah" : self.y,
+        "ye" : self.y,
+        "yea" : self.y,
+        "okay" : self.y,
+        "continue" : self.y
+        }
         self.solved = []
         self.scrambled = []
         self.current = []
         self.length = len(self.solved)
+
+    def y(self): #a bit unnecessary but whatevs
+        print("Continuing...")
+        time.sleep(1)
 
     def play_level(self): #main loop for any level
         x = 0
@@ -32,8 +45,8 @@ class Levelsbase:
     def level_end(self): #called when user finishes level
         while True:
             user_input = input("Would you like to try again? Input: ").strip().lower()
-            if  user_input == "yes": #general "yes" dictionary should be used here, similar to sandbox_yes ~ (TBI)
-                time.sleep(1)
+            if  user_input in self.input_yes:
+                self.input_yes[user_input]()
                 return True
             elif user_input in self.commands:
                 self.commands[user_input]()
@@ -50,8 +63,6 @@ class Levelsbase:
                 continue
             if self.validate(i, sign):
                 return i, sign
-            else:
-                print("Illegal move. ")
         
     def parse_move(self, move): #see get_move()
         if len(move) < 2:

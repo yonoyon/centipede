@@ -10,7 +10,7 @@ class Level_1(Levelsbase):
         self.length = len(self.solved)
     
     def level_1(self): #greets user, starts level
-            print("Welcome to level 1. The goal of any level is to permute the given list into a solved state. ")
+            print("Welcome to level 1. The goal of any level is to permute the given centipede into a solved state. ")
             time.sleep(1)
             print("A solved state will always look the same: positive numbers from 1 upward. ")
             time.sleep(1)
@@ -21,16 +21,19 @@ class Level_1(Levelsbase):
             else:
                 return False
 
-    def validate(self, i, sign): #specific to this level (move type)
+    def validate(self, i, sign): #validates for adjacent swap move type
         if i < 0 or i >= self.length:
+            print("Illegal move; position not in bounds. ")
             return False
         if sign == "+" and i + 1 >= self.length:
+            print("Illegal move; right is an impossible direction for given position. ")
             return False
         if sign == "-" and i - 1 < 0:
+            print("Illegal move; left is an impossible direction for given position. ")
             return False
         return True
 
-    def permute(self, i, sign): #specific to this level. probably gonna call this "adjacent swap"
+    def permute(self, i, sign): #adjacent swap move type
         if sign == "+":
             self.current[i], self.current[i+1]  = self.current[i+1], self.current[i]
         else:
