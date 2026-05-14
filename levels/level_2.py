@@ -4,13 +4,13 @@ class Level_2(LevelsBase):
 
     def __init__(self,commands):
         super().__init__(commands)
-        self.solved = self.solved_3.copy()
-        self.scrambled = [4,5,1,3,6,2]
-        self.current = [4,5,1,3,6,2]
+        self.solved = self.solved_6.copy()
+        self.scrambled = [4, 5, 1, 3, 6, 2]
+        self.current = self.scrambled.copy()
         self.length = len(self.solved)
     
     def start(self): #greets user, starts level
-            print("Welcome to level 2. In this level, you will learn about the extremes - sliding move type. ")
+            print("Welcome to level 2. In this level, you will learn about the extremes move type. ")
             time.sleep(1)
             print("As mentioned in level 1, the solved state will remain the same for every level, with the exception of its length. ")
             time.sleep(1)
@@ -21,13 +21,13 @@ class Level_2(LevelsBase):
             else:
                 return False
 
-    def validate(self, i, sign): #validates for extremes - sliding move type
+    def validate(self, i, sign): #validates for extremes move type
         if i < 0 or i >= self.length:
             print("Illegal move; position not in bounds. ")
             return False
         return True
 
-    def permute(self, i, sign): #extremes - sliding move type
+    def permute(self, i, sign): #extremes move type
         l = self.length
         if sign == "+":
            self.current.insert(l,self.current.pop(i))

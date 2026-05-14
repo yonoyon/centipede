@@ -17,8 +17,10 @@ class LevelsBase:
         self.scrambled = []
         self.current = []
         self.length = len(self.solved)
-        #solved states for levels below
-        self.solved_3 = list(range(1, 7))
+        #solved states for levels below (number indicates length)
+        self.solved_6 = list(range(1, 7))
+        self.solved_8 = list(range(1, 9))
+        self.solved_10 = list(range(1, 11))
 
     def y(self): #a bit unnecessary but whatevs
         print("Continuing...")
@@ -71,7 +73,7 @@ class LevelsBase:
         
     def parse_move(self, move): #see get_move()
         if len(move) < 2:
-            raise ValueError("Too short. ")
+            raise ValueError("Not a valid move notation length (input help to learn move notation). ")
 
         try:
             i = int(move[:-1]) - 1

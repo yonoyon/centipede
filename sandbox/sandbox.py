@@ -1,8 +1,7 @@
 """
 sandbox is a separate game mode. it is fundamentally different from the levels mode, insofar as user can choose length and move type freely.
 for the sake of simplicity, every aspect of sandbox mode is covered here, from I/O to logic. this is INTENTIONAL.
-one thing that could change regarding this is the methods in general. currently theres no clear separation between what interacts with the user, what actually interacts with the list and what just loops it all...
-sandbox is more of a standalone thing for now.
+this mode NEEDS a lot of fixing to be fun ~(TBI)
 """
 
 import sys #sys.exit()

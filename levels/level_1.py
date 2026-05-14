@@ -4,9 +4,9 @@ class Level_1(LevelsBase):
 
     def __init__(self,commands):
         super().__init__(commands)
-        self.solved = self.solved_3.copy()
+        self.solved = self.solved_6.copy()
         self.scrambled = [1, 3, 2, 5, 6, 4]
-        self.current = [1, 3, 2, 5, 6, 4]
+        self.current = self.scrambled.copy()
         self.length = len(self.solved)
     
     def start(self): #greets user, starts level

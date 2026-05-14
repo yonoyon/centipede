@@ -2,7 +2,7 @@ import time #time.sleep()
 import sys #sys.exit()
 
 from sandbox.sandbox import SandBox
-from levels import Level_1, Level_2, Level_3
+from levels import Level_1, Level_2, Level_3, Level_4, Level_5, Level_6
 
 """
 basic commands (+functions), work globally. could look into separation of sandbox and levels mode even more by splitting these as well.. not sure yet.
@@ -52,6 +52,9 @@ level_names = {
     1 : Level_1,
     2 : Level_2,
     3 : Level_3,
+    4 : Level_4,
+    5 : Level_5,
+    6 : Level_6
 }
 
 def levels(): #loop for level mode. pre-level input validation could be moved into LevelsBase ~ (TBI)
@@ -101,7 +104,7 @@ menu_commands = {
 
     "sandbox" : tosandbox,
     "sand" : tosandbox,
-    "s" : tosandbox
+    "s" : tosandbox,
 }
 
 def menu(): #main menu
