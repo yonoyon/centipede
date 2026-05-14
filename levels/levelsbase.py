@@ -1,6 +1,6 @@
 import time
 
-class Levelsbase:
+class LevelsBase:
     
     def __init__(self, commands):
         self.commands = commands
@@ -17,6 +17,8 @@ class Levelsbase:
         self.scrambled = []
         self.current = []
         self.length = len(self.solved)
+        #solved states for levels below
+        self.solved_3 = list(range(1, 7))
 
     def y(self): #a bit unnecessary but whatevs
         print("Continuing...")
@@ -79,5 +81,5 @@ class Levelsbase:
     
         return i, sign
 
-    def check(self): #check!
+    def check(self):
         return self.current == self.solved

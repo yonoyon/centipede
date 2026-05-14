@@ -1,12 +1,12 @@
 import time
-from levelsbase import Levelsbase
-class Level_1(Levelsbase):
+from levels.levelsbase import LevelsBase
+class Level_1(LevelsBase):
 
     def __init__(self,commands):
         super().__init__(commands)
-        self.solved = [1,2,3,4,5,6]
-        self.scrambled = [1,3,2,5,6,4]
-        self.current = [1,3,2,5,6,4]
+        self.solved = self.solved_3.copy()
+        self.scrambled = [1, 3, 2, 5, 6, 4]
+        self.current = [1, 3, 2, 5, 6, 4]
         self.length = len(self.solved)
     
     def level_1(self): #greets user, starts level
@@ -35,7 +35,7 @@ class Level_1(Levelsbase):
 
     def permute(self, i, sign): #adjacent swap move type
         if sign == "+":
-            self.current[i], self.current[i+1]  = self.current[i+1], self.current[i]
+            self.current[i], self.current[i+1] = self.current[i+1], self.current[i]
         else:
-            self.current[i], self.current[i-1]  = self.current[i-1], self.current[i]
+            self.current[i], self.current[i-1] = self.current[i-1], self.current[i]
 

@@ -9,7 +9,7 @@ import sys #sys.exit()
 import random #random.choice()
 import time #time.sleep()
 
-class Sandbox:
+class SandBox:
 
     def  __init__(self, commands): #constructor
         self.commands = commands
@@ -146,9 +146,9 @@ class Sandbox:
 
     def swap(self, i, sign): #main puzzle logic. used for scrambling and solving. not sure how im gonna implement the multiple move sandbox system yet, ~ (TBI)
         if sign == "+":
-            self.current_centipede[i], self.current_centipede[i+1]  = -self.current_centipede[i+1], -self.current_centipede[i]
+            self.current_centipede[i], self.current_centipede[i+1] = -self.current_centipede[i+1], -self.current_centipede[i]
         else:
-            self.current_centipede[i], self.current_centipede[i-1]  = -self.current_centipede[i-1], -self.current_centipede[i]
+            self.current_centipede[i], self.current_centipede[i-1] = -self.current_centipede[i-1], -self.current_centipede[i]
     
     def check(self): #very simple, "independent" method
         if self.current_centipede == self.solved_centipede:

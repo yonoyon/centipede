@@ -1,10 +1,10 @@
 import time
-from levelsbase import Levelsbase
-class Level_2(Levelsbase):
+from levels.levelsbase import LevelsBase
+class Level_2(LevelsBase):
 
     def __init__(self,commands):
         super().__init__(commands)
-        self.solved = [1,2,3,4,5,6]
+        self.solved = self.solved_3.copy()
         self.scrambled = [4,5,1,3,6,2]
         self.current = [4,5,1,3,6,2]
         self.length = len(self.solved)
@@ -15,7 +15,7 @@ class Level_2(Levelsbase):
             print("As mentioned in level 1, the solved state will remain the same for every level, with the exception of its length. ")
             time.sleep(1)
             print(f"Try to figure out how exactly this move type permutes the centipede, and solve it!")
-            print(f"Your current state: {self.current}")
+            print(f"Your centipede: {self.current}")
             if self.play_level():
                 return True
             else:

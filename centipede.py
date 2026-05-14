@@ -1,9 +1,10 @@
 import time #time.sleep()
 import sys #sys.exit()
 
-from sandbox import Sandbox
-from level_1 import Level_1
-from level_2 import Level_2
+from sandbox.sandbox import SandBox
+from levels.level_1 import Level_1
+from levels.level_2 import Level_2
+from levels.level_3 import Level_3
 
 """
 basic commands (+functions), work globally. could look into separation of sandbox and levels mode even more by splitting these as well.. not sure yet.
@@ -42,30 +43,37 @@ level_names = {
     "1" : 1,
     "one" : 1,
     "2" : 2,
-    "two" : 2
+    "two" : 2,
+    "3" : 3,
+    "three" : 3
 }
 
 
 def levels(): #absolute abomination of a loop.. better one TBI for sure
-    print("Choose which level to play. Currently available: 1, 2 ")
+    print("Choose which level to play. Currently available: 1, 2, 3 ")
     while True:
         choice = input("Input level to play: ")
         if choice in commands:
             commands[choice]()
-        if choice in level_names:
-            if level_names[choice] == 1:
-                level = Level_1(commands)
-                if not level.level_1():
-                    break
-            if level_names[choice] == 2:
-                level = Level_2(commands)
-                if not level.level_2():
-                    break
+            break
+
+        if level_names[choice] == 1:
+            level = Level_1(commands)
+            if not level.level_1():
+                break
+        if level_names[choice] == 2:
+            level = Level_2(commands)
+            if not level.level_2():
+                break
+        if level_names[choice] == 3:
+            level = Level_3(commands)
+            if not level.level_3():
+                break
 
 
 def tosandbox(): #initializes object for sandbox mode and loops it as long as user wants
     while True:
-        centipede = Sandbox(commands, input_yes)
+        centipede = SandBox(commands)
         if centipede.sandbox():
             pass
         else:
