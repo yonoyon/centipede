@@ -1,5 +1,5 @@
 import time
-from levels.levelsbase import LevelsBase
+from .levelsbase import LevelsBase
 class Level_2(LevelsBase):
 
     def __init__(self,commands):
@@ -9,7 +9,7 @@ class Level_2(LevelsBase):
         self.current = [4,5,1,3,6,2]
         self.length = len(self.solved)
     
-    def level_2(self): #greets user, starts level
+    def start(self): #greets user, starts level
             print("Welcome to level 2. In this level, you will learn about the extremes - sliding move type. ")
             time.sleep(1)
             print("As mentioned in level 1, the solved state will remain the same for every level, with the exception of its length. ")

@@ -1,5 +1,5 @@
 import time
-from levels.levelsbase import LevelsBase
+from .levelsbase import LevelsBase
 class Level_1(LevelsBase):
 
     def __init__(self,commands):
@@ -9,7 +9,7 @@ class Level_1(LevelsBase):
         self.current = [1, 3, 2, 5, 6, 4]
         self.length = len(self.solved)
     
-    def level_1(self): #greets user, starts level
+    def start(self): #greets user, starts level
             print("Welcome to level 1. The goal of any level is to permute the given centipede into a solved state. ")
             time.sleep(1)
             print("A solved state will always look the same: positive numbers from 1 upward. ")

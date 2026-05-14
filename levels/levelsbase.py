@@ -58,6 +58,9 @@ class LevelsBase:
     def get_move(self): #gets move from user, calls parse_move and validate (level specific) to filter out bad move notation/illegal moves
         while True:
             move = input("Input move: ")
+            if move in self.commands:
+                self.commands[move]()
+                continue
             try:
                 i, sign = self.parse_move(move)
             except ValueError as e:

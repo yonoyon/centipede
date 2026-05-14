@@ -2,9 +2,7 @@ import time #time.sleep()
 import sys #sys.exit()
 
 from sandbox.sandbox import SandBox
-from levels.level_1 import Level_1
-from levels.level_2 import Level_2
-from levels.level_3 import Level_3
+from levels import Level_1, Level_2, Level_3
 
 """
 basic commands (+functions), work globally. could look into separation of sandbox and levels mode even more by splitting these as well.. not sure yet.
@@ -28,6 +26,7 @@ commands = {
     "help" : help_func,
     "hepl" : help_func,
     "h" : help_func,
+    "hrlp" : help_func,
     "tutorial" : help_func,
     "tut" : help_func,
 
@@ -38,38 +37,49 @@ commands = {
     "leave" : quit_func,
 }
 
+"""
+dicts for levels, levels func itself
+"""
 
-level_names = {
-    "1" : 1,
-    "one" : 1,
-    "2" : 2,
-    "two" : 2,
-    "3" : 3,
-    "three" : 3
+input_back = {
+    "back" : 0,
+    "return" : 0,
+    "go back" : 0
 }
 
 
-def levels(): #absolute abomination of a loop.. better one TBI for sure
-    print("Choose which level to play. Currently available: 1, 2, 3 ")
+level_names = {
+    1 : Level_1,
+    2 : Level_2,
+    3 : Level_3,
+}
+
+def levels(): #loop for level mode. pre-level input validation could be moved into LevelsBase ~ (TBI)
+    available_levels = list(level_names.keys())
+    print(f"Currently available levels: {available_levels} ")
+    
     while True:
-        choice = input("Input level to play: ")
+        choice = input("Input level to play: ").strip().lower()
         if choice in commands:
             commands[choice]()
+            continue
+        if choice in input_back:
             break
 
-        if level_names[choice] == 1:
-            level = Level_1(commands)
-            if not level.level_1():
-                break
-        if level_names[choice] == 2:
-            level = Level_2(commands)
-            if not level.level_2():
-                break
-        if level_names[choice] == 3:
-            level = Level_3(commands)
-            if not level.level_3():
-                break
+        try:
+            choice = int(choice)
+        except ValueError:
+            print("Input a number. ")
+            continue
 
+        if choice not in available_levels:
+            print("Level unavailable. ")
+            continue
+        
+        if choice in level_names:
+            level = level_names[choice](commands)
+            if not level.start():
+                break
 
 def tosandbox(): #initializes object for sandbox mode and loops it as long as user wants
     while True:

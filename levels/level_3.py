@@ -1,5 +1,5 @@
 import time
-from levels.levelsbase import LevelsBase
+from .levelsbase import LevelsBase
 class Level_3(LevelsBase):
 
     def __init__(self,commands):
@@ -9,8 +9,8 @@ class Level_3(LevelsBase):
         self.current = [-4, 6, 1, -3, -2, -5]
         self.length = len(self.solved)
     
-    def level_3(self): #greets user, starts level
-            print("Welcome to level 3. You will be introduced to the adjacent swap - sign flip move type. ")
+    def start(self): #greets user, starts level
+            print("Welcome to level 3. An introduction to the adjacent swap - sign flip move type. ")
             time.sleep(1)
             print("It's easier than it may look like.")
             time.sleep(1)
