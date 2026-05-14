@@ -44,7 +44,6 @@ class LevelsBase:
                     continue
                 else:
                     return False
-        return True
 
     def level_end(self): #called when user finishes level
         while True:
@@ -73,7 +72,7 @@ class LevelsBase:
         
     def parse_move(self, move): #see get_move()
         if len(move) < 2:
-            raise ValueError("Not a valid move notation length (input help to learn move notation). ")
+            raise ValueError("Too short (move must consist of direction and position). ")
 
         try:
             i = int(move[:-1]) - 1

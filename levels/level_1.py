@@ -2,8 +2,9 @@ import time
 from .levelsbase import LevelsBase
 class Level_1(LevelsBase):
 
-    def __init__(self,commands):
+    def __init__(self,commands,available_levels):
         super().__init__(commands)
+        self.available_levels  = available_levels
         self.solved = self.solved_6.copy()
         self.scrambled = [1, 3, 2, 5, 6, 4]
         self.current = self.scrambled.copy()
@@ -16,10 +17,11 @@ class Level_1(LevelsBase):
             time.sleep(1)
             print(f"Have a try with {self.current} - you can almost certainly solve this intuitively. Input help if you don't know the move notation, or if you need help in general. ")
             print("Have fun!")
-            if self.play_level():
-                return True
-            else:
+            self.play_level()
+            if 2 not in self.available_levels:
+                self.available_levels.append(2)
                 return False
+
 
     def validate(self, i, sign): #validates for adjacent swap move type
         if i < 0 or i >= self.length:

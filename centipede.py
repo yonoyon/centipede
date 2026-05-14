@@ -57,11 +57,11 @@ level_names = {
     6 : Level_6
 }
 
-def levels(): #loop for level mode. pre-level input validation could be moved into LevelsBase ~ (TBI)
-    available_levels = list(level_names.keys())
-    print(f"Currently available levels: {available_levels} ")
-    
+def levels(): #loop for level mode. pre-level input validation could be moved into LevelsBase ~ (TBI)    
+    available_levels = [1]
     while True:
+        print(f"Currently available levels: {available_levels} ")
+        print("Play through the levels to unlock new ones! ")
         choice = input("Input level to play: ").strip().lower()
         if choice in commands:
             commands[choice]()
@@ -79,10 +79,10 @@ def levels(): #loop for level mode. pre-level input validation could be moved in
             print("Level unavailable. ")
             continue
         
-        if choice in level_names:
-            level = level_names[choice](commands)
+        if choice in available_levels:
+            level = level_names[choice](commands, available_levels)
             if not level.start():
-                break
+                pass
 
 def tosandbox(): #initializes object for sandbox mode and loops it as long as user wants
     while True:
@@ -100,10 +100,24 @@ menu_commands = {
 
     "levels" : levels,
     "level" : levels,
+    
+    "lervel" :levels,
+    "öevel" : levels,
+    "levell" : levels,
+    
+    "level mode": levels,
+    "levels mode": levels,
+    "levelmode" : levels,
+    "levelsmode" : levels,
+    
     "l" : levels,
 
     "sandbox" : tosandbox,
     "sand" : tosandbox,
+    
+    "snndbox" : tosandbox,
+    "sandbpx" : tosandbox,
+
     "s" : tosandbox,
 }
 

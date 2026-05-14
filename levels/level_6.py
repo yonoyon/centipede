@@ -2,8 +2,9 @@ import time
 from .levelsbase import LevelsBase
 class Level_6(LevelsBase):
 
-    def __init__(self,commands):
+    def __init__(self,commands,available_levels):
         super().__init__(commands)
+        self.available_levels  = available_levels
         self.solved = self.solved_10.copy()
         self.scrambled = [5, -8, -1, -6, -3, 10, -9, -2, -7, -4]
         self.current = self.scrambled.copy()
@@ -16,10 +17,11 @@ class Level_6(LevelsBase):
             time.sleep(1)
             print(f"And here's a fun fact: if a segment can never reach a specific position, then a permutation with the segment in that position as a target is impossible to achieve. ")
             print(f"Enough said, you know the drill: {self.current}")
-            if self.play_level():
-                return True
-            else:
-                return False
+            self.play_level()
+            #if 7 not in self.available_levels: <- level 7 (challenge level) not yet implemented
+            #   self.available_levels.append(7)
+            #    return False
+            return False
 
     def validate(self, i, sign): #validates for jump swap - sign flip move type
         if i < 0 or i >= self.length:

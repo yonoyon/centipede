@@ -2,8 +2,9 @@ import time
 from .levelsbase import LevelsBase
 class Level_2(LevelsBase):
 
-    def __init__(self,commands):
+    def __init__(self,commands,available_levels):
         super().__init__(commands)
+        self.available_levels  = available_levels
         self.solved = self.solved_6.copy()
         self.scrambled = [4, 5, 1, 3, 6, 2]
         self.current = self.scrambled.copy()
@@ -16,10 +17,11 @@ class Level_2(LevelsBase):
             time.sleep(1)
             print(f"Try to figure out how exactly this move type permutes the centipede, and solve it!")
             print(f"Your centipede: {self.current}")
-            if self.play_level():
-                return True
-            else:
+            self.play_level()
+            if 3 not in self.available_levels:
+                self.available_levels.append(3)
                 return False
+            return False
 
     def validate(self, i, sign): #validates for extremes move type
         if i < 0 or i >= self.length:

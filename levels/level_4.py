@@ -2,8 +2,9 @@ import time
 from .levelsbase import LevelsBase
 class Level_4(LevelsBase):
 
-    def __init__(self,commands):
+    def __init__(self,commands,available_levels):
         super().__init__(commands)
+        self.available_levels  = available_levels
         self.solved = self.solved_10.copy()
         self.scrambled = [5,10,7,2,9,6,1,4,3,8]
         self.current = self.scrambled.copy()
@@ -16,10 +17,11 @@ class Level_4(LevelsBase):
             time.sleep(1)
             print(f"For this move type, you're getting a longer centipede: {self.current}")
             print(f"Good luck!")
-            if self.play_level():
-                return True
-            else:
+            self.play_level()
+            if 5 not in self.available_levels:
+                self.available_levels.append(5)
                 return False
+            return False
 
     def validate(self, i, sign): #validates for jump swap move type
         if i < 0 or i >= self.length:

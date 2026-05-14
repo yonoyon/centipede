@@ -2,8 +2,9 @@ import time
 from .levelsbase import LevelsBase
 class Level_3(LevelsBase):
 
-    def __init__(self,commands):
+    def __init__(self,commands,available_levels):
         super().__init__(commands)
+        self.available_levels  = available_levels
         self.solved = self.solved_6.copy()
         self.scrambled = [-4, 6, 1, -3, -2, -5]
         self.current = self.scrambled.copy()
@@ -16,10 +17,11 @@ class Level_3(LevelsBase):
             time.sleep(1)
             print(f"Here's your centipede for this level: {self.current}")
             print(f"Good luck!")
-            if self.play_level():
-                return True
-            else:
+            self.play_level()
+            if 4 not in self.available_levels:
+                self.available_levels.append(4)
                 return False
+            return False
 
     def validate(self, i, sign): #validates for adjacent swap - sign flip move type
         if i < 0 or i >= self.length:
