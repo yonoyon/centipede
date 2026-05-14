@@ -21,7 +21,7 @@ Thanks for reading. Have fun!
 ---MESSAGE---
 
 I'm working on this program to get better at python. I'm a beginner and learned OOP *with* this thing.
-This isn't vibe-coded, but I do use AI to actually learn python (most often by asking for specific syntax), as I never formally learned it. Naturally, this code isn't perfect, and you'll see a lot of stuff yet to be implemented everywhere with respective comments explaining my thought process.
+This isn't vibe-coded, but I do use AI to actually learn python (most often by asking for specific syntax), as I never formally learned it. But majority of the time I try to figure stuff our myself, which is why naturally, this code isn't perfect, and you'll see a lot of stuff yet to be implemented everywhere with respective comments explaining my thought process.
 
 My commits reflect this. I try to commit regularly and incrementally - and with each commit, I learn something new.
 I'm quite proud of what I've achieved so far.
