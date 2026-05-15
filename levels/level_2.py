@@ -10,24 +10,24 @@ class Level_2(LevelsBase):
         self.current = self.scrambled.copy()
         self.length = len(self.solved)
     
-    def start(self): #greets user, starts level
-            print("Welcome to level 2. In this level, you will learn about the extremes move type. ")
-            time.sleep(1)
-            print("As mentioned in level 1, the solved state will remain the same for every level, with the exception of its length. ")
-            time.sleep(1)
-            print(f"Try to figure out how exactly this move type permutes the centipede, and solve it!")
-            print(f"Your centipede: {self.current}")
-            self.play_level()
-            if 3 not in self.available_levels:
-                self.available_levels.append(3)
-                return False
-            return False
+    def start(self):
+        self.play_level()
+        if 3 not in self.available_levels:
+            self.available_levels.append(3)
+        return False
+
+    def welcome(self):
+        print("Welcome to level 2. In this level, you will learn about the extremes move type. ")
+        time.sleep(1)
+        print("As mentioned in level 1, the solved state will remain the same for every level, with the exception of its length. ")
+        time.sleep(1)
+        print(f"Try to figure out how exactly this move type permutes the centipede, and solve it!")
+        print(f"Your centipede: {self.current}")
 
     def validate(self, i, sign): #validates for extremes move type
         if i < 0 or i >= self.length:
-            print("Illegal move; position not in bounds. ")
-            return False
-        return True
+            return "oob_error"
+        return "no_error"
 
     def permute(self, i, sign): #extremes move type
         l = self.length

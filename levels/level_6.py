@@ -10,32 +10,30 @@ class Level_6(LevelsBase):
         self.current = self.scrambled.copy()
         self.length = len(self.solved)
     
-    def start(self): #greets user, starts level
-            print("Welcome to level 6. This is the last level before your first challenge. ")
-            time.sleep(1)
-            print("You probably already saw this coming. The jump swap - sign flip move type.")
-            time.sleep(1)
-            print(f"And here's a fun fact: if a segment can never reach a specific position, then a permutation with the segment in that position as a target is impossible to achieve. ")
-            print(f"Enough said, you know the drill: {self.current}")
-            self.play_level()
-            #if 7 not in self.available_levels: <- level 7 (challenge level) not yet implemented
-            #   self.available_levels.append(7)
-            #    return False
-            return False
+    def start(self): #starts level, unlocks next one
+        self.play_level()
+        #if 7 not in self.available_levels: <- level 7 (challenge level) not yet implemented
+        #   self.available_levels.append(7)
+        return False
+
+    def welcome(self):
+        print("Welcome to level 6. This is the last level before your first challenge. ")
+        time.sleep(1)
+        print("You probably already saw this coming. The jump swap - sign flip move type.")
+        time.sleep(1)
+        print(f"And here's a fun fact: if a segment can never reach a specific position, then a permutation with the segment in that position as a target is impossible to achieve. ")
+        print(f"Enough said, you know the drill: {self.current}")
 
     def validate(self, i, sign): #validates for jump swap - sign flip move type
         if i < 0 or i >= self.length:
-            print("Illegal move; position not in bounds. ")
-            return False
+            return "oob_error"
         if sign == "+" and i + 2 >= self.length:
-            print("Illegal move; right is an impossible direction for given position. ")
-            return False
+            return "right_impossible_error"
         if sign == "-" and i - 2 < 0:
-            print("Illegal move; left is an impossible direction for given position. ")
-            return False
-        return True
+            return "left_impossible_error"
+        return "no_error"
 
-    def permute(self, i, sign): #adjacent jump swap -sign flip move type
+    def permute(self, i, sign): #adjacent jump swap - sign flip move type
         if sign == "+":
             self.current[i], self.current[i+2] = -self.current[i+2], -self.current[i]
         else:

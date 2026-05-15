@@ -81,6 +81,7 @@ def levels(): #loop for level mode. pre-level input validation could be moved in
         
         if choice in available_levels:
             level = level_names[choice](commands, available_levels)
+            level.welcome()
             if not level.start():
                 pass
 

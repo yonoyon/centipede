@@ -10,30 +10,28 @@ class Level_1(LevelsBase):
         self.current = self.scrambled.copy()
         self.length = len(self.solved)
     
-    def start(self): #greets user, starts level
-            print("Welcome to level 1. The goal of any level is to permute the given centipede into a solved state. ")
-            time.sleep(1)
-            print("A solved state will always look the same: positive numbers from 1 upward. ")
-            time.sleep(1)
-            print(f"Have a try with {self.current} - you can almost certainly solve this intuitively. Input help if you don't know the move notation, or if you need help in general. ")
-            print("Have fun!")
-            self.play_level()
-            if 2 not in self.available_levels:
-                self.available_levels.append(2)
-                return False
+    def start(self):
+        self.play_level()
+        if 2 not in self.available_levels:
+            self.available_levels.append(2)
+        return False
 
+    def welcome(self):
+        print("Welcome to level 1. The goal of any level is to permute the given centipede into a solved state. ")
+        time.sleep(1)
+        print("A solved state will always look the same: positive numbers from 1 upward. ")
+        time.sleep(1)
+        print(f"Have a try with {self.current} - you can almost certainly solve this intuitively. Input help if you don't know the move notation, or if you need help in general. ")
+        print("Have fun!")  
 
     def validate(self, i, sign): #validates for adjacent swap move type
         if i < 0 or i >= self.length:
-            print("Illegal move; position not in bounds. ")
-            return False
+            return "oob_error"
         if sign == "+" and i + 1 >= self.length:
-            print("Illegal move; right is an impossible direction for given position. ")
-            return False
+            return "right_impossible_error"
         if sign == "-" and i - 1 < 0:
-            print("Illegal move; left is an impossible direction for given position. ")
-            return False
-        return True
+            return "left_impossible_error"
+        return "no_error"
 
     def permute(self, i, sign): #adjacent swap move type
         if sign == "+":
