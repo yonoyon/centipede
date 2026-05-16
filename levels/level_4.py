@@ -1,6 +1,8 @@
 import time
 from .levelsbase import LevelsBase
-class Level_4(LevelsBase):
+from .levelslogic import LevelsLogic
+
+class Level_4(LevelsBase, LevelsLogic):
 
     def __init__(self,commands,available_levels):
         super().__init__(commands)
