@@ -1,6 +1,7 @@
 import time
 from .levelsbase import LevelsBase
 from .levelslogic import LevelsLogic
+from ..moves.movetypes import AS
 
 class Level_1(LevelsBase, LevelsLogic):
 
