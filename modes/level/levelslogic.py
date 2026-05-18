@@ -1,9 +1,14 @@
+
+
 class LevelsLogic():
 
 
     def __init__(self):
         pass
 
+    def play(self):
+            return True
+    
     def get_move(self): #gets move from user, calls parse_move and validate (level specific) to filter out bad move notation/illegal moves LOGIC
         while True:
             move = self.input_move()
@@ -47,7 +52,7 @@ class LevelsLogic():
             self.commands[thing]()
             return True
 
-    def play_level(self): #main loop for any level LOGIC
+    def logic_play_level(self): #main loop for any level LOGIC
         x = 0
         while True:
             self.print_current_state()
@@ -76,3 +81,5 @@ class LevelsLogic():
                 self.commands[user_input]()
             else:
                 return False
+
+        

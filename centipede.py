@@ -1,8 +1,13 @@
 import time #time.sleep()
 import sys #sys.exit()
 
-from sandbox.sandbox import SandBox
-from levels import Level_1, Level_2, Level_3, Level_4, Level_5, Level_6
+#from sandbox.sandbox import SandBox
+from modes.level.levels.level_1 import Level_1
+from modes.level.levels.level_2 import Level_2
+from modes.level.levels.level_3 import Level_3
+from modes.level.levels.level_4 import Level_4
+from modes.level.levels.level_5 import Level_5
+from modes.level.levels.level_6 import Level_6
 
 """
 basic commands (+functions), work globally. could look into separation of sandbox and levels mode even more by splitting these as well.. not sure yet.
@@ -82,7 +87,7 @@ def levels(): #loop for level mode. pre-level input validation could be moved in
         if choice in available_levels:
             level = level_names[choice](commands, available_levels)
             level.welcome()
-            if not level.start():
+            if not level.run():
                 pass
 
 def tosandbox(): #initializes object for sandbox mode and loops it as long as user wants

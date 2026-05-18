@@ -1,14 +1,4 @@
-class MoveTypes():
-    
-    def __init__(self):
-        pass
-    def validate(self, i, sign, current):
-        raise NotImplementedError
-
-    def permute(self, i, sign, current):
-        raise NotImplementedError
-
-class AS(MoveTypes): #adjacent swap
+class AS(): #adjacent swap
     
     def validate(self, i, sign, current):
         if i < 0 or i >= len(current):
@@ -25,7 +15,7 @@ class AS(MoveTypes): #adjacent swap
         else:
             current[i], current[i-1] = current[i-1], current[i]
 
-class ASSF(MoveTypes): #adjacent swap - sign flip
+class ASSF(): #adjacent swap - sign flip
     
     def validate(self, i, sign, current):
         if i < 0 or i >= len(current):
@@ -42,7 +32,7 @@ class ASSF(MoveTypes): #adjacent swap - sign flip
         else:
             current[i], current[i-1] = -current[i-1], -current[i]
 
-class EX(MoveTypes): #extremes
+class EX(): #extremes
     
     def validate(self, i, sign, current):
         if i < 0 or i >= len(current):
@@ -56,7 +46,7 @@ class EX(MoveTypes): #extremes
         else:
             current.insert(0,current.pop(i))
 
-class EXSF(MoveTypes): #extremes - sign flip
+class EXSF(): #extremes - sign flip
     
     def validate(self, i, sign, current):
         if i < 0 or i >= len(current):
@@ -70,7 +60,7 @@ class EXSF(MoveTypes): #extremes - sign flip
         else:
             current.insert(0,-current.pop(i))
 
-class JS(MoveTypes): #jump swap
+class JS(): #jump swap
     
     def validate(self, i, sign, current):
         if i < 0 or i >= len(current):
@@ -87,7 +77,7 @@ class JS(MoveTypes): #jump swap
         else:
             current[i], current[i-2] = current[i-2], current[i]
 
-class JSSF(MoveTypes): #jump swap - sign flip
+class JSSF(): #jump swap - sign flip
     def validate(self, i, sign, current):
         if i < 0 or i >= len(current):
             return "oob_error"

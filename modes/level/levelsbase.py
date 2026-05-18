@@ -4,8 +4,8 @@ import time
 
 class LevelsBase:
     
-    def __init__(self, commands):
-        self.commands = commands
+    def __init__(self):#, commands):
+       # self.commands = commands
         self.input_yes = {
         "yes" : self.y,
         "y" : self.y,
@@ -46,7 +46,7 @@ class LevelsBase:
         lorem = input("Would you like to try again? Input: ").strip().lower()
         return lorem
 
-    def input_move(self):
+    def get_move(self):
         move = input("Input move: ")
         return move
     
@@ -55,3 +55,6 @@ class LevelsBase:
     
     def print_illegal_move(self, error):
         print(self.illegal_moves[error])
+
+    def finish(self):
+        return False
